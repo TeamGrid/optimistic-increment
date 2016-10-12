@@ -8,7 +8,9 @@ export function optimisticIncrement(opts, value, precision = 1) {
     ? { identifier: opts , value, precision }
     : opts
   const computation = Tracker.currentComputation ? Tracker.currentComputation._id : 'none'
-  const identifier = `${options.identifier}_${computation}`
+  const identifier = options.disableComputationTracking
+    ? options.identifier
+    : `${options.identifier}_${computation}`
 
   if (!_values[identifier]) _values[identifier] = {}
   let val = _values[identifier] || {}
